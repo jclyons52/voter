@@ -2,8 +2,8 @@
 import * as Long from "long";
 import { util, configure, Writer, Reader } from "protobufjs/minimal";
 export const protobufPackage = "jclyons52.voter.voter";
-const basePoll = { creator: "", id: 0, title: "", options: "" };
-export const Poll = {
+const baseVote = { creator: "", id: 0, pollID: "", option: "" };
+export const Vote = {
     encode(message, writer = Writer.create()) {
         if (message.creator !== "") {
             writer.uint32(10).string(message.creator);
@@ -11,19 +11,18 @@ export const Poll = {
         if (message.id !== 0) {
             writer.uint32(16).uint64(message.id);
         }
-        if (message.title !== "") {
-            writer.uint32(26).string(message.title);
+        if (message.pollID !== "") {
+            writer.uint32(26).string(message.pollID);
         }
-        for (const v of message.options) {
-            writer.uint32(34).string(v);
+        if (message.option !== "") {
+            writer.uint32(34).string(message.option);
         }
         return writer;
     },
     decode(input, length) {
         const reader = input instanceof Uint8Array ? new Reader(input) : input;
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = { ...basePoll };
-        message.options = [];
+        const message = { ...baseVote };
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
@@ -34,10 +33,10 @@ export const Poll = {
                     message.id = longToNumber(reader.uint64());
                     break;
                 case 3:
-                    message.title = reader.string();
+                    message.pollID = reader.string();
                     break;
                 case 4:
-                    message.options.push(reader.string());
+                    message.option = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -47,8 +46,7 @@ export const Poll = {
         return message;
     },
     fromJSON(object) {
-        const message = { ...basePoll };
-        message.options = [];
+        const message = { ...baseVote };
         if (object.creator !== undefined && object.creator !== null) {
             message.creator = String(object.creator);
         }
@@ -61,16 +59,17 @@ export const Poll = {
         else {
             message.id = 0;
         }
-        if (object.title !== undefined && object.title !== null) {
-            message.title = String(object.title);
+        if (object.pollID !== undefined && object.pollID !== null) {
+            message.pollID = String(object.pollID);
         }
         else {
-            message.title = "";
+            message.pollID = "";
         }
-        if (object.options !== undefined && object.options !== null) {
-            for (const e of object.options) {
-                message.options.push(String(e));
-            }
+        if (object.option !== undefined && object.option !== null) {
+            message.option = String(object.option);
+        }
+        else {
+            message.option = "";
         }
         return message;
     },
@@ -78,18 +77,12 @@ export const Poll = {
         const obj = {};
         message.creator !== undefined && (obj.creator = message.creator);
         message.id !== undefined && (obj.id = message.id);
-        message.title !== undefined && (obj.title = message.title);
-        if (message.options) {
-            obj.options = message.options.map((e) => e);
-        }
-        else {
-            obj.options = [];
-        }
+        message.pollID !== undefined && (obj.pollID = message.pollID);
+        message.option !== undefined && (obj.option = message.option);
         return obj;
     },
     fromPartial(object) {
-        const message = { ...basePoll };
-        message.options = [];
+        const message = { ...baseVote };
         if (object.creator !== undefined && object.creator !== null) {
             message.creator = object.creator;
         }
@@ -102,16 +95,17 @@ export const Poll = {
         else {
             message.id = 0;
         }
-        if (object.title !== undefined && object.title !== null) {
-            message.title = object.title;
+        if (object.pollID !== undefined && object.pollID !== null) {
+            message.pollID = object.pollID;
         }
         else {
-            message.title = "";
+            message.pollID = "";
         }
-        if (object.options !== undefined && object.options !== null) {
-            for (const e of object.options) {
-                message.options.push(e);
-            }
+        if (object.option !== undefined && object.option !== null) {
+            message.option = object.option;
+        }
+        else {
+            message.option = "";
         }
         return message;
     },

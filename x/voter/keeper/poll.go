@@ -2,10 +2,11 @@ package keeper
 
 import (
 	"encoding/binary"
+	"strconv"
+
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/jclyons52/voter/x/voter/types"
-	"strconv"
 )
 
 // GetPollCount get the total number of poll
@@ -42,7 +43,7 @@ func (k Keeper) AppendPoll(
 	ctx sdk.Context,
 	creator string,
 	title string,
-	options string,
+	options []string,
 ) uint64 {
 	// Create the poll
 	count := k.GetPollCount(ctx)

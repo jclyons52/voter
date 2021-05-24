@@ -5,25 +5,25 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-var _ sdk.Msg = &MsgCreatePoll{}
+var _ sdk.Msg = &MsgCreateVote{}
 
-func NewMsgCreatePoll(creator string, title string, options []string) *MsgCreatePoll {
-	return &MsgCreatePoll{
+func NewMsgCreateVote(creator string, pollID string, option string) *MsgCreateVote {
+	return &MsgCreateVote{
 		Creator: creator,
-		Title:   title,
-		Options: options,
+		PollID:  pollID,
+		Option:  option,
 	}
 }
 
-func (msg *MsgCreatePoll) Route() string {
+func (msg *MsgCreateVote) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgCreatePoll) Type() string {
-	return "CreatePoll"
+func (msg *MsgCreateVote) Type() string {
+	return "CreateVote"
 }
 
-func (msg *MsgCreatePoll) GetSigners() []sdk.AccAddress {
+func (msg *MsgCreateVote) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -31,12 +31,12 @@ func (msg *MsgCreatePoll) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgCreatePoll) GetSignBytes() []byte {
+func (msg *MsgCreateVote) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgCreatePoll) ValidateBasic() error {
+func (msg *MsgCreateVote) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
@@ -44,26 +44,26 @@ func (msg *MsgCreatePoll) ValidateBasic() error {
 	return nil
 }
 
-var _ sdk.Msg = &MsgUpdatePoll{}
+var _ sdk.Msg = &MsgUpdateVote{}
 
-func NewMsgUpdatePoll(creator string, id uint64, title string, options []string) *MsgUpdatePoll {
-	return &MsgUpdatePoll{
+func NewMsgUpdateVote(creator string, id uint64, pollID string, option string) *MsgUpdateVote {
+	return &MsgUpdateVote{
 		Id:      id,
 		Creator: creator,
-		Title:   title,
-		Options: options,
+		PollID:  pollID,
+		Option:  option,
 	}
 }
 
-func (msg *MsgUpdatePoll) Route() string {
+func (msg *MsgUpdateVote) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgUpdatePoll) Type() string {
-	return "UpdatePoll"
+func (msg *MsgUpdateVote) Type() string {
+	return "UpdateVote"
 }
 
-func (msg *MsgUpdatePoll) GetSigners() []sdk.AccAddress {
+func (msg *MsgUpdateVote) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -71,12 +71,12 @@ func (msg *MsgUpdatePoll) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgUpdatePoll) GetSignBytes() []byte {
+func (msg *MsgUpdateVote) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgUpdatePoll) ValidateBasic() error {
+func (msg *MsgUpdateVote) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
@@ -84,23 +84,23 @@ func (msg *MsgUpdatePoll) ValidateBasic() error {
 	return nil
 }
 
-var _ sdk.Msg = &MsgCreatePoll{}
+var _ sdk.Msg = &MsgCreateVote{}
 
-func NewMsgDeletePoll(creator string, id uint64) *MsgDeletePoll {
-	return &MsgDeletePoll{
+func NewMsgDeleteVote(creator string, id uint64) *MsgDeleteVote {
+	return &MsgDeleteVote{
 		Id:      id,
 		Creator: creator,
 	}
 }
-func (msg *MsgDeletePoll) Route() string {
+func (msg *MsgDeleteVote) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgDeletePoll) Type() string {
-	return "DeletePoll"
+func (msg *MsgDeleteVote) Type() string {
+	return "DeleteVote"
 }
 
-func (msg *MsgDeletePoll) GetSigners() []sdk.AccAddress {
+func (msg *MsgDeleteVote) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -108,12 +108,12 @@ func (msg *MsgDeletePoll) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgDeletePoll) GetSignBytes() []byte {
+func (msg *MsgDeleteVote) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgDeletePoll) ValidateBasic() error {
+func (msg *MsgDeleteVote) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

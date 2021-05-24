@@ -12,16 +12,16 @@ import (
 	"github.com/jclyons52/voter/x/voter/types"
 )
 
-type createPollRequest struct {
+type createVoteRequest struct {
 	BaseReq rest.BaseReq `json:"base_req"`
 	Creator string       `json:"creator"`
-	Title   string       `json:"title"`
-	Options []string     `json:"options"`
+	PollID  string       `json:"pollID"`
+	Option  string       `json:"option"`
 }
 
-func createPollHandler(clientCtx client.Context) http.HandlerFunc {
+func createVoteHandler(clientCtx client.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req createPollRequest
+		var req createVoteRequest
 		if !rest.ReadRESTReq(w, r, clientCtx.LegacyAmino, &req) {
 			rest.WriteErrorResponse(w, http.StatusBadRequest, "failed to parse request")
 			return
@@ -38,35 +38,35 @@ func createPollHandler(clientCtx client.Context) http.HandlerFunc {
 			return
 		}
 
-		parsedTitle := req.Title
+		parsedPollID := req.PollID
 
-		parsedOptions := req.Options
+		parsedOption := req.Option
 
-		msg := types.NewMsgCreatePoll(
+		msg := types.NewMsgCreateVote(
 			req.Creator,
-			parsedTitle,
-			parsedOptions,
+			parsedPollID,
+			parsedOption,
 		)
 
 		tx.WriteGeneratedTxResponse(clientCtx, w, req.BaseReq, msg)
 	}
 }
 
-type updatePollRequest struct {
+type updateVoteRequest struct {
 	BaseReq rest.BaseReq `json:"base_req"`
 	Creator string       `json:"creator"`
-	Title   string       `json:"title"`
-	Options []string     `json:"options"`
+	PollID  string       `json:"pollID"`
+	Option  string       `json:"option"`
 }
 
-func updatePollHandler(clientCtx client.Context) http.HandlerFunc {
+func updateVoteHandler(clientCtx client.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		id, err := strconv.ParseUint(mux.Vars(r)["id"], 10, 64)
 		if err != nil {
 			return
 		}
 
-		var req updatePollRequest
+		var req updateVoteRequest
 		if !rest.ReadRESTReq(w, r, clientCtx.LegacyAmino, &req) {
 			rest.WriteErrorResponse(w, http.StatusBadRequest, "failed to parse request")
 			return
@@ -83,34 +83,34 @@ func updatePollHandler(clientCtx client.Context) http.HandlerFunc {
 			return
 		}
 
-		parsedTitle := req.Title
+		parsedPollID := req.PollID
 
-		parsedOptions := req.Options
+		parsedOption := req.Option
 
-		msg := types.NewMsgUpdatePoll(
+		msg := types.NewMsgUpdateVote(
 			req.Creator,
 			id,
-			parsedTitle,
-			parsedOptions,
+			parsedPollID,
+			parsedOption,
 		)
 
 		tx.WriteGeneratedTxResponse(clientCtx, w, req.BaseReq, msg)
 	}
 }
 
-type deletePollRequest struct {
+type deleteVoteRequest struct {
 	BaseReq rest.BaseReq `json:"base_req"`
 	Creator string       `json:"creator"`
 }
 
-func deletePollHandler(clientCtx client.Context) http.HandlerFunc {
+func deleteVoteHandler(clientCtx client.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		id, err := strconv.ParseUint(mux.Vars(r)["id"], 10, 64)
 		if err != nil {
 			return
 		}
 
-		var req deletePollRequest
+		var req deleteVoteRequest
 		if !rest.ReadRESTReq(w, r, clientCtx.LegacyAmino, &req) {
 			rest.WriteErrorResponse(w, http.StatusBadRequest, "failed to parse request")
 			return
@@ -127,7 +127,7 @@ func deletePollHandler(clientCtx client.Context) http.HandlerFunc {
 			return
 		}
 
-		msg := types.NewMsgDeletePoll(
+		msg := types.NewMsgDeleteVote(
 			req.Creator,
 			id,
 		)
