@@ -1,0 +1,12 @@
+syntax = "proto3";
+package jclyons52.voter.voter;
+
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/jclyons52/voter/x/voter/types";
+
+// GenesisState defines the capability module's genesis state.
+message GenesisState {
+    // this line is used by starport scaffolding # genesis/proto/state
+}
+
