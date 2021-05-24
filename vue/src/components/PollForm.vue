@@ -59,7 +59,7 @@ export default {
         title: this.title,
         options: this.options.map((o) => o.title),
       };
-      await this.$store.dispatch("username.voter.voter/sendMsgCreatePoll", {
+      await this.$store.dispatch("jclyons52.voter.voter/sendMsgCreatePoll", {
         value,
         fee: [],
       });

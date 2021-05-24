@@ -53,14 +53,14 @@ export default {
     },
     polls() {
       return (
-        this.$store.getters["username.voter.voter/getPollAll"]({
+        this.$store.getters["jclyons52.voter.voter/getPollAll"]({
           params: {}
         })?.Poll ?? []
       );
     },
     votes() {
       return (
-        this.$store.getters["username.voter.voter/getVoteAll"]({
+        this.$store.getters["jclyons52.voter.voter/getVoteAll"]({
           params: {}
         })?.Vote ?? []
       );
@@ -74,11 +74,11 @@ export default {
     async submit(pollID, option) {
       
       const value = { creator: this.currentAccount, pollID, option };
-      await this.$store.dispatch("username.voter.voter/sendMsgCreateVote", {
+      await this.$store.dispatch("jclyons52.voter.voter/sendMsgCreateVote", {
         value,
         fee: [],
       });
-      await this.$store.dispatch("username.voter.voter/QueryPollAll", {
+      await this.$store.dispatch("jclyons52.voter.voter/QueryPollAll", {
         options: { subscribe: true, all: true },
         params: {},
       });
