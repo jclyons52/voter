@@ -1,0 +1,13 @@
+syntax = "proto3";
+package jclyons52.voter.voter;
+
+option go_package = "github.com/jclyons52/voter/x/voter/types";
+
+import "gogoproto/gogo.proto";
+
+message Poll {
+  string creator = 1;
+  uint64 id = 2;
+  string title = 3; 
+  string options = 4; 
+}
