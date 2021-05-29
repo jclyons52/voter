@@ -1,17 +1,17 @@
 /* eslint-disable */
-import { Reader, util, configure, Writer } from "protobufjs/minimal";
-import * as Long from "long";
-export const protobufPackage = "jclyons52.voter.voter";
-const baseMsgCreateVote = { creator: "", pollID: "", option: "" };
+import { Reader, util, configure, Writer } from 'protobufjs/minimal';
+import * as Long from 'long';
+export const protobufPackage = 'jclyons52.voter.voter';
+const baseMsgCreateVote = { creator: '', pollID: '', option: '' };
 export const MsgCreateVote = {
     encode(message, writer = Writer.create()) {
-        if (message.creator !== "") {
+        if (message.creator !== '') {
             writer.uint32(10).string(message.creator);
         }
-        if (message.pollID !== "") {
+        if (message.pollID !== '') {
             writer.uint32(18).string(message.pollID);
         }
-        if (message.option !== "") {
+        if (message.option !== '') {
             writer.uint32(26).string(message.option);
         }
         return writer;
@@ -45,19 +45,19 @@ export const MsgCreateVote = {
             message.creator = String(object.creator);
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.pollID !== undefined && object.pollID !== null) {
             message.pollID = String(object.pollID);
         }
         else {
-            message.pollID = "";
+            message.pollID = '';
         }
         if (object.option !== undefined && object.option !== null) {
             message.option = String(object.option);
         }
         else {
-            message.option = "";
+            message.option = '';
         }
         return message;
     },
@@ -74,22 +74,22 @@ export const MsgCreateVote = {
             message.creator = object.creator;
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.pollID !== undefined && object.pollID !== null) {
             message.pollID = object.pollID;
         }
         else {
-            message.pollID = "";
+            message.pollID = '';
         }
         if (object.option !== undefined && object.option !== null) {
             message.option = object.option;
         }
         else {
-            message.option = "";
+            message.option = '';
         }
         return message;
-    },
+    }
 };
 const baseMsgCreateVoteResponse = { id: 0 };
 export const MsgCreateVoteResponse = {
@@ -140,26 +140,21 @@ export const MsgCreateVoteResponse = {
             message.id = 0;
         }
         return message;
-    },
+    }
 };
-const baseMsgUpdateVote = {
-    creator: "",
-    id: 0,
-    pollID: "",
-    option: "",
-};
+const baseMsgUpdateVote = { creator: '', id: 0, pollID: '', option: '' };
 export const MsgUpdateVote = {
     encode(message, writer = Writer.create()) {
-        if (message.creator !== "") {
+        if (message.creator !== '') {
             writer.uint32(10).string(message.creator);
         }
         if (message.id !== 0) {
             writer.uint32(16).uint64(message.id);
         }
-        if (message.pollID !== "") {
+        if (message.pollID !== '') {
             writer.uint32(26).string(message.pollID);
         }
-        if (message.option !== "") {
+        if (message.option !== '') {
             writer.uint32(34).string(message.option);
         }
         return writer;
@@ -196,7 +191,7 @@ export const MsgUpdateVote = {
             message.creator = String(object.creator);
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.id !== undefined && object.id !== null) {
             message.id = Number(object.id);
@@ -208,13 +203,13 @@ export const MsgUpdateVote = {
             message.pollID = String(object.pollID);
         }
         else {
-            message.pollID = "";
+            message.pollID = '';
         }
         if (object.option !== undefined && object.option !== null) {
             message.option = String(object.option);
         }
         else {
-            message.option = "";
+            message.option = '';
         }
         return message;
     },
@@ -232,7 +227,7 @@ export const MsgUpdateVote = {
             message.creator = object.creator;
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.id !== undefined && object.id !== null) {
             message.id = object.id;
@@ -244,16 +239,16 @@ export const MsgUpdateVote = {
             message.pollID = object.pollID;
         }
         else {
-            message.pollID = "";
+            message.pollID = '';
         }
         if (object.option !== undefined && object.option !== null) {
             message.option = object.option;
         }
         else {
-            message.option = "";
+            message.option = '';
         }
         return message;
-    },
+    }
 };
 const baseMsgUpdateVoteResponse = {};
 export const MsgUpdateVoteResponse = {
@@ -285,12 +280,12 @@ export const MsgUpdateVoteResponse = {
     fromPartial(_) {
         const message = { ...baseMsgUpdateVoteResponse };
         return message;
-    },
+    }
 };
-const baseMsgDeleteVote = { creator: "", id: 0 };
+const baseMsgDeleteVote = { creator: '', id: 0 };
 export const MsgDeleteVote = {
     encode(message, writer = Writer.create()) {
-        if (message.creator !== "") {
+        if (message.creator !== '') {
             writer.uint32(10).string(message.creator);
         }
         if (message.id !== 0) {
@@ -324,7 +319,7 @@ export const MsgDeleteVote = {
             message.creator = String(object.creator);
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.id !== undefined && object.id !== null) {
             message.id = Number(object.id);
@@ -346,7 +341,7 @@ export const MsgDeleteVote = {
             message.creator = object.creator;
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.id !== undefined && object.id !== null) {
             message.id = object.id;
@@ -355,7 +350,7 @@ export const MsgDeleteVote = {
             message.id = 0;
         }
         return message;
-    },
+    }
 };
 const baseMsgDeleteVoteResponse = {};
 export const MsgDeleteVoteResponse = {
@@ -387,15 +382,15 @@ export const MsgDeleteVoteResponse = {
     fromPartial(_) {
         const message = { ...baseMsgDeleteVoteResponse };
         return message;
-    },
+    }
 };
-const baseMsgCreatePoll = { creator: "", title: "", options: "" };
+const baseMsgCreatePoll = { creator: '', title: '', options: '' };
 export const MsgCreatePoll = {
     encode(message, writer = Writer.create()) {
-        if (message.creator !== "") {
+        if (message.creator !== '') {
             writer.uint32(10).string(message.creator);
         }
-        if (message.title !== "") {
+        if (message.title !== '') {
             writer.uint32(18).string(message.title);
         }
         for (const v of message.options) {
@@ -434,13 +429,13 @@ export const MsgCreatePoll = {
             message.creator = String(object.creator);
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.title !== undefined && object.title !== null) {
             message.title = String(object.title);
         }
         else {
-            message.title = "";
+            message.title = '';
         }
         if (object.options !== undefined && object.options !== null) {
             for (const e of object.options) {
@@ -468,13 +463,13 @@ export const MsgCreatePoll = {
             message.creator = object.creator;
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.title !== undefined && object.title !== null) {
             message.title = object.title;
         }
         else {
-            message.title = "";
+            message.title = '';
         }
         if (object.options !== undefined && object.options !== null) {
             for (const e of object.options) {
@@ -482,7 +477,7 @@ export const MsgCreatePoll = {
             }
         }
         return message;
-    },
+    }
 };
 const baseMsgCreatePollResponse = { id: 0 };
 export const MsgCreatePollResponse = {
@@ -533,23 +528,18 @@ export const MsgCreatePollResponse = {
             message.id = 0;
         }
         return message;
-    },
+    }
 };
-const baseMsgUpdatePoll = {
-    creator: "",
-    id: 0,
-    title: "",
-    options: "",
-};
+const baseMsgUpdatePoll = { creator: '', id: 0, title: '', options: '' };
 export const MsgUpdatePoll = {
     encode(message, writer = Writer.create()) {
-        if (message.creator !== "") {
+        if (message.creator !== '') {
             writer.uint32(10).string(message.creator);
         }
         if (message.id !== 0) {
             writer.uint32(16).uint64(message.id);
         }
-        if (message.title !== "") {
+        if (message.title !== '') {
             writer.uint32(26).string(message.title);
         }
         for (const v of message.options) {
@@ -591,7 +581,7 @@ export const MsgUpdatePoll = {
             message.creator = String(object.creator);
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.id !== undefined && object.id !== null) {
             message.id = Number(object.id);
@@ -603,7 +593,7 @@ export const MsgUpdatePoll = {
             message.title = String(object.title);
         }
         else {
-            message.title = "";
+            message.title = '';
         }
         if (object.options !== undefined && object.options !== null) {
             for (const e of object.options) {
@@ -632,7 +622,7 @@ export const MsgUpdatePoll = {
             message.creator = object.creator;
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.id !== undefined && object.id !== null) {
             message.id = object.id;
@@ -644,7 +634,7 @@ export const MsgUpdatePoll = {
             message.title = object.title;
         }
         else {
-            message.title = "";
+            message.title = '';
         }
         if (object.options !== undefined && object.options !== null) {
             for (const e of object.options) {
@@ -652,7 +642,7 @@ export const MsgUpdatePoll = {
             }
         }
         return message;
-    },
+    }
 };
 const baseMsgUpdatePollResponse = {};
 export const MsgUpdatePollResponse = {
@@ -684,12 +674,12 @@ export const MsgUpdatePollResponse = {
     fromPartial(_) {
         const message = { ...baseMsgUpdatePollResponse };
         return message;
-    },
+    }
 };
-const baseMsgDeletePoll = { creator: "", id: 0 };
+const baseMsgDeletePoll = { creator: '', id: 0 };
 export const MsgDeletePoll = {
     encode(message, writer = Writer.create()) {
-        if (message.creator !== "") {
+        if (message.creator !== '') {
             writer.uint32(10).string(message.creator);
         }
         if (message.id !== 0) {
@@ -723,7 +713,7 @@ export const MsgDeletePoll = {
             message.creator = String(object.creator);
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.id !== undefined && object.id !== null) {
             message.id = Number(object.id);
@@ -745,7 +735,7 @@ export const MsgDeletePoll = {
             message.creator = object.creator;
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.id !== undefined && object.id !== null) {
             message.id = object.id;
@@ -754,7 +744,7 @@ export const MsgDeletePoll = {
             message.id = 0;
         }
         return message;
-    },
+    }
 };
 const baseMsgDeletePollResponse = {};
 export const MsgDeletePollResponse = {
@@ -786,7 +776,7 @@ export const MsgDeletePollResponse = {
     fromPartial(_) {
         const message = { ...baseMsgDeletePollResponse };
         return message;
-    },
+    }
 };
 export class MsgClientImpl {
     constructor(rpc) {
@@ -794,49 +784,49 @@ export class MsgClientImpl {
     }
     CreateVote(request) {
         const data = MsgCreateVote.encode(request).finish();
-        const promise = this.rpc.request("jclyons52.voter.voter.Msg", "CreateVote", data);
+        const promise = this.rpc.request('jclyons52.voter.voter.Msg', 'CreateVote', data);
         return promise.then((data) => MsgCreateVoteResponse.decode(new Reader(data)));
     }
     UpdateVote(request) {
         const data = MsgUpdateVote.encode(request).finish();
-        const promise = this.rpc.request("jclyons52.voter.voter.Msg", "UpdateVote", data);
+        const promise = this.rpc.request('jclyons52.voter.voter.Msg', 'UpdateVote', data);
         return promise.then((data) => MsgUpdateVoteResponse.decode(new Reader(data)));
     }
     DeleteVote(request) {
         const data = MsgDeleteVote.encode(request).finish();
-        const promise = this.rpc.request("jclyons52.voter.voter.Msg", "DeleteVote", data);
+        const promise = this.rpc.request('jclyons52.voter.voter.Msg', 'DeleteVote', data);
         return promise.then((data) => MsgDeleteVoteResponse.decode(new Reader(data)));
     }
     CreatePoll(request) {
         const data = MsgCreatePoll.encode(request).finish();
-        const promise = this.rpc.request("jclyons52.voter.voter.Msg", "CreatePoll", data);
+        const promise = this.rpc.request('jclyons52.voter.voter.Msg', 'CreatePoll', data);
         return promise.then((data) => MsgCreatePollResponse.decode(new Reader(data)));
     }
     UpdatePoll(request) {
         const data = MsgUpdatePoll.encode(request).finish();
-        const promise = this.rpc.request("jclyons52.voter.voter.Msg", "UpdatePoll", data);
+        const promise = this.rpc.request('jclyons52.voter.voter.Msg', 'UpdatePoll', data);
         return promise.then((data) => MsgUpdatePollResponse.decode(new Reader(data)));
     }
     DeletePoll(request) {
         const data = MsgDeletePoll.encode(request).finish();
-        const promise = this.rpc.request("jclyons52.voter.voter.Msg", "DeletePoll", data);
+        const promise = this.rpc.request('jclyons52.voter.voter.Msg', 'DeletePoll', data);
         return promise.then((data) => MsgDeletePollResponse.decode(new Reader(data)));
     }
 }
 var globalThis = (() => {
-    if (typeof globalThis !== "undefined")
+    if (typeof globalThis !== 'undefined')
         return globalThis;
-    if (typeof self !== "undefined")
+    if (typeof self !== 'undefined')
         return self;
-    if (typeof window !== "undefined")
+    if (typeof window !== 'undefined')
         return window;
-    if (typeof global !== "undefined")
+    if (typeof global !== 'undefined')
         return global;
-    throw "Unable to locate global object";
+    throw 'Unable to locate global object';
 })();
 function longToNumber(long) {
     if (long.gt(Number.MAX_SAFE_INTEGER)) {
-        throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+        throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER');
     }
     return long.toNumber();
 }

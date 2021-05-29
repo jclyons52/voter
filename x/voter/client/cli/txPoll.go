@@ -5,6 +5,8 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/spf13/cast"
+
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
@@ -14,18 +16,24 @@ import (
 func CmdCreatePoll() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "create-poll [title] [options]",
-		Short: "Creates a new poll",
+		Short: "Create a new poll",
 		Args:  cobra.MinimumNArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			argsTitle := string(args[0])
+			argsTitle, err := cast.ToStringE(args[0])
+			if err != nil {
+				return err
+			}
 			argsOptions := args[1:]
+			if err != nil {
+				return err
+			}
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
 
-			msg := types.NewMsgCreatePoll(clientCtx.GetFromAddress().String(), string(argsTitle), argsOptions)
+			msg := types.NewMsgCreatePoll(clientCtx.GetFromAddress().String(), argsTitle, argsOptions)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
@@ -49,15 +57,22 @@ func CmdUpdatePoll() *cobra.Command {
 				return err
 			}
 
-			argsTitle := string(args[1])
+			argsTitle, err := cast.ToStringE(args[1])
+			if err != nil {
+				return err
+			}
+
 			argsOptions := args[2:]
+			if err != nil {
+				return err
+			}
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
 
-			msg := types.NewMsgUpdatePoll(clientCtx.GetFromAddress().String(), id, string(argsTitle), argsOptions)
+			msg := types.NewMsgUpdatePoll(clientCtx.GetFromAddress().String(), id, argsTitle, argsOptions)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
@@ -72,7 +87,7 @@ func CmdUpdatePoll() *cobra.Command {
 
 func CmdDeletePoll() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "delete-poll [id] [title] [options]",
+		Use:   "delete-poll [id]",
 		Short: "Delete a poll by id",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {

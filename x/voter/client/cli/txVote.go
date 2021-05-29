@@ -1,8 +1,11 @@
 package cli
 
 import (
-	"github.com/spf13/cobra"
 	"strconv"
+
+	"github.com/spf13/cobra"
+
+	"github.com/spf13/cast"
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
@@ -13,18 +16,24 @@ import (
 func CmdCreateVote() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "create-vote [pollID] [option]",
-		Short: "Creates a new vote",
+		Short: "Create a new vote",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			argsPollID := string(args[0])
-			argsOption := string(args[1])
+			argsPollID, err := cast.ToStringE(args[0])
+			if err != nil {
+				return err
+			}
+			argsOption, err := cast.ToStringE(args[1])
+			if err != nil {
+				return err
+			}
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
 
-			msg := types.NewMsgCreateVote(clientCtx.GetFromAddress().String(), string(argsPollID), string(argsOption))
+			msg := types.NewMsgCreateVote(clientCtx.GetFromAddress().String(), argsPollID, argsOption)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
@@ -48,15 +57,22 @@ func CmdUpdateVote() *cobra.Command {
 				return err
 			}
 
-			argsPollID := string(args[1])
-			argsOption := string(args[2])
+			argsPollID, err := cast.ToStringE(args[1])
+			if err != nil {
+				return err
+			}
+
+			argsOption, err := cast.ToStringE(args[2])
+			if err != nil {
+				return err
+			}
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
 
-			msg := types.NewMsgUpdateVote(clientCtx.GetFromAddress().String(), id, string(argsPollID), string(argsOption))
+			msg := types.NewMsgUpdateVote(clientCtx.GetFromAddress().String(), id, argsPollID, argsOption)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
@@ -71,7 +87,7 @@ func CmdUpdateVote() *cobra.Command {
 
 func CmdDeleteVote() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "delete-vote [id] [pollID] [option]",
+		Use:   "delete-vote [id]",
 		Short: "Delete a vote by id",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {

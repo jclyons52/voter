@@ -1,17 +1,17 @@
 /* eslint-disable */
-import * as Long from "long";
-import { util, configure, Writer, Reader } from "protobufjs/minimal";
-export const protobufPackage = "jclyons52.voter.voter";
-const basePoll = { creator: "", id: 0, title: "", options: "" };
+import * as Long from 'long';
+import { util, configure, Writer, Reader } from 'protobufjs/minimal';
+export const protobufPackage = 'jclyons52.voter.voter';
+const basePoll = { creator: '', id: 0, title: '', options: '' };
 export const Poll = {
     encode(message, writer = Writer.create()) {
-        if (message.creator !== "") {
+        if (message.creator !== '') {
             writer.uint32(10).string(message.creator);
         }
         if (message.id !== 0) {
             writer.uint32(16).uint64(message.id);
         }
-        if (message.title !== "") {
+        if (message.title !== '') {
             writer.uint32(26).string(message.title);
         }
         for (const v of message.options) {
@@ -53,7 +53,7 @@ export const Poll = {
             message.creator = String(object.creator);
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.id !== undefined && object.id !== null) {
             message.id = Number(object.id);
@@ -65,7 +65,7 @@ export const Poll = {
             message.title = String(object.title);
         }
         else {
-            message.title = "";
+            message.title = '';
         }
         if (object.options !== undefined && object.options !== null) {
             for (const e of object.options) {
@@ -94,7 +94,7 @@ export const Poll = {
             message.creator = object.creator;
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.id !== undefined && object.id !== null) {
             message.id = object.id;
@@ -106,7 +106,7 @@ export const Poll = {
             message.title = object.title;
         }
         else {
-            message.title = "";
+            message.title = '';
         }
         if (object.options !== undefined && object.options !== null) {
             for (const e of object.options) {
@@ -114,22 +114,22 @@ export const Poll = {
             }
         }
         return message;
-    },
+    }
 };
 var globalThis = (() => {
-    if (typeof globalThis !== "undefined")
+    if (typeof globalThis !== 'undefined')
         return globalThis;
-    if (typeof self !== "undefined")
+    if (typeof self !== 'undefined')
         return self;
-    if (typeof window !== "undefined")
+    if (typeof window !== 'undefined')
         return window;
-    if (typeof global !== "undefined")
+    if (typeof global !== 'undefined')
         return global;
-    throw "Unable to locate global object";
+    throw 'Unable to locate global object';
 })();
 function longToNumber(long) {
     if (long.gt(Number.MAX_SAFE_INTEGER)) {
-        throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+        throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER');
     }
     return long.toNumber();
 }

@@ -457,10 +457,13 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type QueryClient interface {
-	// this line is used by starport scaffolding # 2
+	// Queries a vote by id.
 	Vote(ctx context.Context, in *QueryGetVoteRequest, opts ...grpc.CallOption) (*QueryGetVoteResponse, error)
+	// Queries a list of vote items.
 	VoteAll(ctx context.Context, in *QueryAllVoteRequest, opts ...grpc.CallOption) (*QueryAllVoteResponse, error)
+	// Queries a poll by id.
 	Poll(ctx context.Context, in *QueryGetPollRequest, opts ...grpc.CallOption) (*QueryGetPollResponse, error)
+	// Queries a list of poll items.
 	PollAll(ctx context.Context, in *QueryAllPollRequest, opts ...grpc.CallOption) (*QueryAllPollResponse, error)
 }
 
@@ -510,10 +513,13 @@ func (c *queryClient) PollAll(ctx context.Context, in *QueryAllPollRequest, opts
 
 // QueryServer is the server API for Query service.
 type QueryServer interface {
-	// this line is used by starport scaffolding # 2
+	// Queries a vote by id.
 	Vote(context.Context, *QueryGetVoteRequest) (*QueryGetVoteResponse, error)
+	// Queries a list of vote items.
 	VoteAll(context.Context, *QueryAllVoteRequest) (*QueryAllVoteResponse, error)
+	// Queries a poll by id.
 	Poll(context.Context, *QueryGetPollRequest) (*QueryGetPollResponse, error)
+	// Queries a list of poll items.
 	PollAll(context.Context, *QueryAllPollRequest) (*QueryAllPollResponse, error)
 }
 

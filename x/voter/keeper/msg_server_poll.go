@@ -26,11 +26,15 @@ func (k msgServer) CreatePoll(goCtx context.Context, msg *types.MsgCreatePoll) (
 		return nil, err
 	}
 
+	var poll = types.Poll{
+		Creator: msg.Creator,
+		Title:   msg.Title,
+		Options: msg.Options,
+	}
+
 	id := k.AppendPoll(
 		ctx,
-		msg.Creator,
-		msg.Title,
-		msg.Options,
+		poll,
 	)
 
 	return &types.MsgCreatePollResponse{

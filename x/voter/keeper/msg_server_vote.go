@@ -12,18 +12,25 @@ import (
 func (k msgServer) CreateVote(goCtx context.Context, msg *types.MsgCreateVote) (*types.MsgCreateVoteResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	// Get all existing votes
 	voteList := k.GetAllVote(ctx)
 	for _, existingVote := range voteList {
+		// Check if the account has already voted on this PollID
 		if existingVote.Creator == msg.Creator && existingVote.PollID == msg.PollID {
-			return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "Vote already cast.")
+			// Return an error when a vote has been cast by this account on this PollID
+			return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "Vote already casted.")
 		}
+	}
+
+	var vote = types.Vote{
+		Creator: msg.Creator,
+		PollID:  msg.PollID,
+		Option:  msg.Option,
 	}
 
 	id := k.AppendVote(
 		ctx,
-		msg.Creator,
-		msg.PollID,
-		msg.Option,
+		vote,
 	)
 
 	return &types.MsgCreateVoteResponse{

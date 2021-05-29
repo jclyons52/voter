@@ -8,6 +8,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/jclyons52/voter/x/voter/types"
+	// this line is used by starport scaffolding # ibc/keeper/import
 )
 
 type (
@@ -16,15 +17,23 @@ type (
 		storeKey   sdk.StoreKey
 		memKey     sdk.StoreKey
 		bankKeeper types.BankKeeper
+		// this line is used by starport scaffolding # ibc/keeper/attribute
 	}
 )
 
-func NewKeeper(cdc codec.Marshaler, storeKey, memKey sdk.StoreKey, bankKeeper types.BankKeeper) *Keeper {
+func NewKeeper(
+	cdc codec.Marshaler,
+	storeKey,
+	memKey sdk.StoreKey,
+	bankKeeper types.BankKeeper,
+	// this line is used by starport scaffolding # ibc/keeper/parameter
+) *Keeper {
 	return &Keeper{
 		cdc:        cdc,
 		storeKey:   storeKey,
 		memKey:     memKey,
 		bankKeeper: bankKeeper,
+		// this line is used by starport scaffolding # ibc/keeper/return
 	}
 }
 

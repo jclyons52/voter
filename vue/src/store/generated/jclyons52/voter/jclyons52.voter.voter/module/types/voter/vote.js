@@ -1,20 +1,20 @@
 /* eslint-disable */
-import * as Long from "long";
-import { util, configure, Writer, Reader } from "protobufjs/minimal";
-export const protobufPackage = "jclyons52.voter.voter";
-const baseVote = { creator: "", id: 0, pollID: "", option: "" };
+import * as Long from 'long';
+import { util, configure, Writer, Reader } from 'protobufjs/minimal';
+export const protobufPackage = 'jclyons52.voter.voter';
+const baseVote = { creator: '', id: 0, pollID: '', option: '' };
 export const Vote = {
     encode(message, writer = Writer.create()) {
-        if (message.creator !== "") {
+        if (message.creator !== '') {
             writer.uint32(10).string(message.creator);
         }
         if (message.id !== 0) {
             writer.uint32(16).uint64(message.id);
         }
-        if (message.pollID !== "") {
+        if (message.pollID !== '') {
             writer.uint32(26).string(message.pollID);
         }
-        if (message.option !== "") {
+        if (message.option !== '') {
             writer.uint32(34).string(message.option);
         }
         return writer;
@@ -51,7 +51,7 @@ export const Vote = {
             message.creator = String(object.creator);
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.id !== undefined && object.id !== null) {
             message.id = Number(object.id);
@@ -63,13 +63,13 @@ export const Vote = {
             message.pollID = String(object.pollID);
         }
         else {
-            message.pollID = "";
+            message.pollID = '';
         }
         if (object.option !== undefined && object.option !== null) {
             message.option = String(object.option);
         }
         else {
-            message.option = "";
+            message.option = '';
         }
         return message;
     },
@@ -87,7 +87,7 @@ export const Vote = {
             message.creator = object.creator;
         }
         else {
-            message.creator = "";
+            message.creator = '';
         }
         if (object.id !== undefined && object.id !== null) {
             message.id = object.id;
@@ -99,31 +99,31 @@ export const Vote = {
             message.pollID = object.pollID;
         }
         else {
-            message.pollID = "";
+            message.pollID = '';
         }
         if (object.option !== undefined && object.option !== null) {
             message.option = object.option;
         }
         else {
-            message.option = "";
+            message.option = '';
         }
         return message;
-    },
+    }
 };
 var globalThis = (() => {
-    if (typeof globalThis !== "undefined")
+    if (typeof globalThis !== 'undefined')
         return globalThis;
-    if (typeof self !== "undefined")
+    if (typeof self !== 'undefined')
         return self;
-    if (typeof window !== "undefined")
+    if (typeof window !== 'undefined')
         return window;
-    if (typeof global !== "undefined")
+    if (typeof global !== 'undefined')
         return global;
-    throw "Unable to locate global object";
+    throw 'Unable to locate global object';
 })();
 function longToNumber(long) {
     if (long.gt(Number.MAX_SAFE_INTEGER)) {
-        throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+        throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER');
     }
     return long.toNumber();
 }

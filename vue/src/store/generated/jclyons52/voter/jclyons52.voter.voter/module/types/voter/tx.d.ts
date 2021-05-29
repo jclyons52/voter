@@ -1,4 +1,4 @@
-import { Reader, Writer } from "protobufjs/minimal";
+import { Reader, Writer } from 'protobufjs/minimal';
 export declare const protobufPackage = "jclyons52.voter.voter";
 /** this line is used by starport scaffolding # proto/tx/message */
 export interface MsgCreateVote {

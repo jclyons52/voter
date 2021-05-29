@@ -345,7 +345,7 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title voter/tx.proto
+ * @title voter/genesis.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
@@ -354,6 +354,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    *
    * @tags Query
    * @name QueryPollAll
+   * @summary Queries a list of poll items.
    * @request GET:/jclyons52/voter/voter/poll
    */
   queryPollAll = (
@@ -378,6 +379,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    *
    * @tags Query
    * @name QueryPoll
+   * @summary Queries a poll by id.
    * @request GET:/jclyons52/voter/voter/poll/{id}
    */
   queryPoll = (id: string, params: RequestParams = {}) =>
@@ -393,6 +395,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    *
    * @tags Query
    * @name QueryVoteAll
+   * @summary Queries a list of vote items.
    * @request GET:/jclyons52/voter/voter/vote
    */
   queryVoteAll = (
@@ -417,7 +420,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    *
    * @tags Query
    * @name QueryVote
-   * @summary this line is used by starport scaffolding # 2
+   * @summary Queries a vote by id.
    * @request GET:/jclyons52/voter/voter/vote/{id}
    */
   queryVote = (id: string, params: RequestParams = {}) =>

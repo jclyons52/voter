@@ -40,22 +40,17 @@ func (k Keeper) SetVoteCount(ctx sdk.Context, count uint64) {
 // AppendVote appends a vote in the store with a new id and update the count
 func (k Keeper) AppendVote(
 	ctx sdk.Context,
-	creator string,
-	pollID string,
-	option string,
+	vote types.Vote,
 ) uint64 {
 	// Create the vote
 	count := k.GetVoteCount(ctx)
-	var vote = types.Vote{
-		Creator: creator,
-		Id:      count,
-		PollID:  pollID,
-		Option:  option,
-	}
+
+	// Set the ID of the appended value
+	vote.Id = count
 
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.VoteKey))
-	value := k.cdc.MustMarshalBinaryBare(&vote)
-	store.Set(GetVoteIDBytes(vote.Id), value)
+	appendedValue := k.cdc.MustMarshalBinaryBare(&vote)
+	store.Set(GetVoteIDBytes(vote.Id), appendedValue)
 
 	// Update vote count
 	k.SetVoteCount(ctx, count+1)

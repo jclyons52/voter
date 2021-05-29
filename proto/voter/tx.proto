@@ -2,6 +2,8 @@ syntax = "proto3";
 package jclyons52.voter.voter;
 
 // this line is used by starport scaffolding # proto/tx/import
+import "voter/vote.proto";
+import "voter/poll.proto";
 
 option go_package = "github.com/jclyons52/voter/x/voter/types";
 

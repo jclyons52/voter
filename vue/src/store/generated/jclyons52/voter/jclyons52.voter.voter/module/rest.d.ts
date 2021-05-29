@@ -171,7 +171,7 @@ export declare class HttpClient<SecurityDataType = unknown> {
     request: <T = any, E = any>({ body, secure, path, type, query, format, baseUrl, cancelToken, ...params }: FullRequestParams) => Promise<HttpResponse<T, E>>;
 }
 /**
- * @title voter/tx.proto
+ * @title voter/genesis.proto
  * @version version not set
  */
 export declare class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
@@ -180,6 +180,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      *
      * @tags Query
      * @name QueryPollAll
+     * @summary Queries a list of poll items.
      * @request GET:/jclyons52/voter/voter/poll
      */
     queryPollAll: (query?: {
@@ -193,6 +194,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      *
      * @tags Query
      * @name QueryPoll
+     * @summary Queries a poll by id.
      * @request GET:/jclyons52/voter/voter/poll/{id}
      */
     queryPoll: (id: string, params?: RequestParams) => Promise<HttpResponse<VoterQueryGetPollResponse, RpcStatus>>;
@@ -201,6 +203,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      *
      * @tags Query
      * @name QueryVoteAll
+     * @summary Queries a list of vote items.
      * @request GET:/jclyons52/voter/voter/vote
      */
     queryVoteAll: (query?: {
@@ -214,7 +217,7 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      *
      * @tags Query
      * @name QueryVote
-     * @summary this line is used by starport scaffolding # 2
+     * @summary Queries a vote by id.
      * @request GET:/jclyons52/voter/voter/vote/{id}
      */
     queryVote: (id: string, params?: RequestParams) => Promise<HttpResponse<VoterQueryGetVoteResponse, RpcStatus>>;

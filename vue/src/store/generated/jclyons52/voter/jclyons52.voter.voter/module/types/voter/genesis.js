@@ -1,16 +1,23 @@
 /* eslint-disable */
-import { Vote } from "../voter/vote";
-import { Poll } from "../voter/poll";
-import { Writer, Reader } from "protobufjs/minimal";
-export const protobufPackage = "jclyons52.voter.voter";
-const baseGenesisState = {};
+import * as Long from 'long';
+import { util, configure, Writer, Reader } from 'protobufjs/minimal';
+import { Vote } from '../voter/vote';
+import { Poll } from '../voter/poll';
+export const protobufPackage = 'jclyons52.voter.voter';
+const baseGenesisState = { voteCount: 0, pollCount: 0 };
 export const GenesisState = {
     encode(message, writer = Writer.create()) {
         for (const v of message.voteList) {
-            Vote.encode(v, writer.uint32(18).fork()).ldelim();
+            Vote.encode(v, writer.uint32(26).fork()).ldelim();
+        }
+        if (message.voteCount !== 0) {
+            writer.uint32(32).uint64(message.voteCount);
         }
         for (const v of message.pollList) {
             Poll.encode(v, writer.uint32(10).fork()).ldelim();
+        }
+        if (message.pollCount !== 0) {
+            writer.uint32(16).uint64(message.pollCount);
         }
         return writer;
     },
@@ -23,11 +30,17 @@ export const GenesisState = {
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
-                case 2:
+                case 3:
                     message.voteList.push(Vote.decode(reader, reader.uint32()));
+                    break;
+                case 4:
+                    message.voteCount = longToNumber(reader.uint64());
                     break;
                 case 1:
                     message.pollList.push(Poll.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    message.pollCount = longToNumber(reader.uint64());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -45,27 +58,41 @@ export const GenesisState = {
                 message.voteList.push(Vote.fromJSON(e));
             }
         }
+        if (object.voteCount !== undefined && object.voteCount !== null) {
+            message.voteCount = Number(object.voteCount);
+        }
+        else {
+            message.voteCount = 0;
+        }
         if (object.pollList !== undefined && object.pollList !== null) {
             for (const e of object.pollList) {
                 message.pollList.push(Poll.fromJSON(e));
             }
+        }
+        if (object.pollCount !== undefined && object.pollCount !== null) {
+            message.pollCount = Number(object.pollCount);
+        }
+        else {
+            message.pollCount = 0;
         }
         return message;
     },
     toJSON(message) {
         const obj = {};
         if (message.voteList) {
-            obj.voteList = message.voteList.map((e) => e ? Vote.toJSON(e) : undefined);
+            obj.voteList = message.voteList.map((e) => (e ? Vote.toJSON(e) : undefined));
         }
         else {
             obj.voteList = [];
         }
+        message.voteCount !== undefined && (obj.voteCount = message.voteCount);
         if (message.pollList) {
-            obj.pollList = message.pollList.map((e) => e ? Poll.toJSON(e) : undefined);
+            obj.pollList = message.pollList.map((e) => (e ? Poll.toJSON(e) : undefined));
         }
         else {
             obj.pollList = [];
         }
+        message.pollCount !== undefined && (obj.pollCount = message.pollCount);
         return obj;
     },
     fromPartial(object) {
@@ -77,11 +104,44 @@ export const GenesisState = {
                 message.voteList.push(Vote.fromPartial(e));
             }
         }
+        if (object.voteCount !== undefined && object.voteCount !== null) {
+            message.voteCount = object.voteCount;
+        }
+        else {
+            message.voteCount = 0;
+        }
         if (object.pollList !== undefined && object.pollList !== null) {
             for (const e of object.pollList) {
                 message.pollList.push(Poll.fromPartial(e));
             }
         }
+        if (object.pollCount !== undefined && object.pollCount !== null) {
+            message.pollCount = object.pollCount;
+        }
+        else {
+            message.pollCount = 0;
+        }
         return message;
-    },
+    }
 };
+var globalThis = (() => {
+    if (typeof globalThis !== 'undefined')
+        return globalThis;
+    if (typeof self !== 'undefined')
+        return self;
+    if (typeof window !== 'undefined')
+        return window;
+    if (typeof global !== 'undefined')
+        return global;
+    throw 'Unable to locate global object';
+})();
+function longToNumber(long) {
+    if (long.gt(Number.MAX_SAFE_INTEGER)) {
+        throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER');
+    }
+    return long.toNumber();
+}
+if (util.Long !== Long) {
+    util.Long = Long;
+    configure();
+}

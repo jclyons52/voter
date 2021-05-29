@@ -130,7 +130,7 @@ export class HttpClient {
     }
 }
 /**
- * @title voter/tx.proto
+ * @title voter/genesis.proto
  * @version version not set
  */
 export class Api extends HttpClient {
@@ -141,6 +141,7 @@ export class Api extends HttpClient {
          *
          * @tags Query
          * @name QueryPollAll
+         * @summary Queries a list of poll items.
          * @request GET:/jclyons52/voter/voter/poll
          */
         this.queryPollAll = (query, params = {}) => this.request({
@@ -155,6 +156,7 @@ export class Api extends HttpClient {
          *
          * @tags Query
          * @name QueryPoll
+         * @summary Queries a poll by id.
          * @request GET:/jclyons52/voter/voter/poll/{id}
          */
         this.queryPoll = (id, params = {}) => this.request({
@@ -168,6 +170,7 @@ export class Api extends HttpClient {
          *
          * @tags Query
          * @name QueryVoteAll
+         * @summary Queries a list of vote items.
          * @request GET:/jclyons52/voter/voter/vote
          */
         this.queryVoteAll = (query, params = {}) => this.request({
@@ -182,7 +185,7 @@ export class Api extends HttpClient {
          *
          * @tags Query
          * @name QueryVote
-         * @summary this line is used by starport scaffolding # 2
+         * @summary Queries a vote by id.
          * @request GET:/jclyons52/voter/voter/vote/{id}
          */
         this.queryVote = (id, params = {}) => this.request({

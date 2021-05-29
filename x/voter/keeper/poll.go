@@ -2,11 +2,10 @@ package keeper
 
 import (
 	"encoding/binary"
-	"strconv"
-
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/jclyons52/voter/x/voter/types"
+	"strconv"
 )
 
 // GetPollCount get the total number of poll
@@ -41,22 +40,17 @@ func (k Keeper) SetPollCount(ctx sdk.Context, count uint64) {
 // AppendPoll appends a poll in the store with a new id and update the count
 func (k Keeper) AppendPoll(
 	ctx sdk.Context,
-	creator string,
-	title string,
-	options []string,
+	poll types.Poll,
 ) uint64 {
 	// Create the poll
 	count := k.GetPollCount(ctx)
-	var poll = types.Poll{
-		Creator: creator,
-		Id:      count,
-		Title:   title,
-		Options: options,
-	}
+
+	// Set the ID of the appended value
+	poll.Id = count
 
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PollKey))
-	value := k.cdc.MustMarshalBinaryBare(&poll)
-	store.Set(GetPollIDBytes(poll.Id), value)
+	appendedValue := k.cdc.MustMarshalBinaryBare(&poll)
+	store.Set(GetPollIDBytes(poll.Id), appendedValue)
 
 	// Update poll count
 	k.SetPollCount(ctx, count+1)

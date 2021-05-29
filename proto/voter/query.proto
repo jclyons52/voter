@@ -12,16 +12,24 @@ option go_package = "github.com/jclyons52/voter/x/voter/types";
 // Query defines the gRPC querier service.
 service Query {
     // this line is used by starport scaffolding # 2
+
+	// Queries a vote by id.
 	rpc Vote(QueryGetVoteRequest) returns (QueryGetVoteResponse) {
 		option (google.api.http).get = "/jclyons52/voter/voter/vote/{id}";
 	}
+
+	// Queries a list of vote items.
 	rpc VoteAll(QueryAllVoteRequest) returns (QueryAllVoteResponse) {
 		option (google.api.http).get = "/jclyons52/voter/voter/vote";
 	}
 
+
+	// Queries a poll by id.
 	rpc Poll(QueryGetPollRequest) returns (QueryGetPollResponse) {
 		option (google.api.http).get = "/jclyons52/voter/voter/poll/{id}";
 	}
+
+	// Queries a list of poll items.
 	rpc PollAll(QueryAllPollRequest) returns (QueryAllPollResponse) {
 		option (google.api.http).get = "/jclyons52/voter/voter/poll";
 	}

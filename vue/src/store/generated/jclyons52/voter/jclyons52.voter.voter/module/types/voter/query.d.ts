@@ -1,7 +1,7 @@
-import { Reader, Writer } from "protobufjs/minimal";
-import { Vote } from "../voter/vote";
-import { PageRequest, PageResponse } from "../cosmos/base/query/v1beta1/pagination";
-import { Poll } from "../voter/poll";
+import { Reader, Writer } from 'protobufjs/minimal';
+import { Vote } from '../voter/vote';
+import { PageRequest, PageResponse } from '../cosmos/base/query/v1beta1/pagination';
+import { Poll } from '../voter/poll';
 export declare const protobufPackage = "jclyons52.voter.voter";
 /** this line is used by starport scaffolding # 3 */
 export interface QueryGetVoteRequest {
@@ -88,10 +88,13 @@ export declare const QueryAllPollResponse: {
 };
 /** Query defines the gRPC querier service. */
 export interface Query {
-    /** this line is used by starport scaffolding # 2 */
+    /** Queries a vote by id. */
     Vote(request: QueryGetVoteRequest): Promise<QueryGetVoteResponse>;
+    /** Queries a list of vote items. */
     VoteAll(request: QueryAllVoteRequest): Promise<QueryAllVoteResponse>;
+    /** Queries a poll by id. */
     Poll(request: QueryGetPollRequest): Promise<QueryGetPollResponse>;
+    /** Queries a list of poll items. */
     PollAll(request: QueryAllPollRequest): Promise<QueryAllPollResponse>;
 }
 export declare class QueryClientImpl implements Query {

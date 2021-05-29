@@ -1,10 +1,10 @@
 /* eslint-disable */
-import { Reader, util, configure, Writer } from "protobufjs/minimal";
-import * as Long from "long";
-import { Vote } from "../voter/vote";
-import { PageRequest, PageResponse, } from "../cosmos/base/query/v1beta1/pagination";
-import { Poll } from "../voter/poll";
-export const protobufPackage = "jclyons52.voter.voter";
+import { Reader, util, configure, Writer } from 'protobufjs/minimal';
+import * as Long from 'long';
+import { Vote } from '../voter/vote';
+import { PageRequest, PageResponse } from '../cosmos/base/query/v1beta1/pagination';
+import { Poll } from '../voter/poll';
+export const protobufPackage = 'jclyons52.voter.voter';
 const baseQueryGetVoteRequest = { id: 0 };
 export const QueryGetVoteRequest = {
     encode(message, writer = Writer.create()) {
@@ -54,7 +54,7 @@ export const QueryGetVoteRequest = {
             message.id = 0;
         }
         return message;
-    },
+    }
 };
 const baseQueryGetVoteResponse = {};
 export const QueryGetVoteResponse = {
@@ -93,8 +93,7 @@ export const QueryGetVoteResponse = {
     },
     toJSON(message) {
         const obj = {};
-        message.Vote !== undefined &&
-            (obj.Vote = message.Vote ? Vote.toJSON(message.Vote) : undefined);
+        message.Vote !== undefined && (obj.Vote = message.Vote ? Vote.toJSON(message.Vote) : undefined);
         return obj;
     },
     fromPartial(object) {
@@ -106,7 +105,7 @@ export const QueryGetVoteResponse = {
             message.Vote = undefined;
         }
         return message;
-    },
+    }
 };
 const baseQueryAllVoteRequest = {};
 export const QueryAllVoteRequest = {
@@ -145,10 +144,7 @@ export const QueryAllVoteRequest = {
     },
     toJSON(message) {
         const obj = {};
-        message.pagination !== undefined &&
-            (obj.pagination = message.pagination
-                ? PageRequest.toJSON(message.pagination)
-                : undefined);
+        message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
         return obj;
     },
     fromPartial(object) {
@@ -160,7 +156,7 @@ export const QueryAllVoteRequest = {
             message.pagination = undefined;
         }
         return message;
-    },
+    }
 };
 const baseQueryAllVoteResponse = {};
 export const QueryAllVoteResponse = {
@@ -218,10 +214,7 @@ export const QueryAllVoteResponse = {
         else {
             obj.Vote = [];
         }
-        message.pagination !== undefined &&
-            (obj.pagination = message.pagination
-                ? PageResponse.toJSON(message.pagination)
-                : undefined);
+        message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
         return obj;
     },
     fromPartial(object) {
@@ -239,7 +232,7 @@ export const QueryAllVoteResponse = {
             message.pagination = undefined;
         }
         return message;
-    },
+    }
 };
 const baseQueryGetPollRequest = { id: 0 };
 export const QueryGetPollRequest = {
@@ -290,7 +283,7 @@ export const QueryGetPollRequest = {
             message.id = 0;
         }
         return message;
-    },
+    }
 };
 const baseQueryGetPollResponse = {};
 export const QueryGetPollResponse = {
@@ -329,8 +322,7 @@ export const QueryGetPollResponse = {
     },
     toJSON(message) {
         const obj = {};
-        message.Poll !== undefined &&
-            (obj.Poll = message.Poll ? Poll.toJSON(message.Poll) : undefined);
+        message.Poll !== undefined && (obj.Poll = message.Poll ? Poll.toJSON(message.Poll) : undefined);
         return obj;
     },
     fromPartial(object) {
@@ -342,7 +334,7 @@ export const QueryGetPollResponse = {
             message.Poll = undefined;
         }
         return message;
-    },
+    }
 };
 const baseQueryAllPollRequest = {};
 export const QueryAllPollRequest = {
@@ -381,10 +373,7 @@ export const QueryAllPollRequest = {
     },
     toJSON(message) {
         const obj = {};
-        message.pagination !== undefined &&
-            (obj.pagination = message.pagination
-                ? PageRequest.toJSON(message.pagination)
-                : undefined);
+        message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
         return obj;
     },
     fromPartial(object) {
@@ -396,7 +385,7 @@ export const QueryAllPollRequest = {
             message.pagination = undefined;
         }
         return message;
-    },
+    }
 };
 const baseQueryAllPollResponse = {};
 export const QueryAllPollResponse = {
@@ -454,10 +443,7 @@ export const QueryAllPollResponse = {
         else {
             obj.Poll = [];
         }
-        message.pagination !== undefined &&
-            (obj.pagination = message.pagination
-                ? PageResponse.toJSON(message.pagination)
-                : undefined);
+        message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
         return obj;
     },
     fromPartial(object) {
@@ -475,7 +461,7 @@ export const QueryAllPollResponse = {
             message.pagination = undefined;
         }
         return message;
-    },
+    }
 };
 export class QueryClientImpl {
     constructor(rpc) {
@@ -483,39 +469,39 @@ export class QueryClientImpl {
     }
     Vote(request) {
         const data = QueryGetVoteRequest.encode(request).finish();
-        const promise = this.rpc.request("jclyons52.voter.voter.Query", "Vote", data);
+        const promise = this.rpc.request('jclyons52.voter.voter.Query', 'Vote', data);
         return promise.then((data) => QueryGetVoteResponse.decode(new Reader(data)));
     }
     VoteAll(request) {
         const data = QueryAllVoteRequest.encode(request).finish();
-        const promise = this.rpc.request("jclyons52.voter.voter.Query", "VoteAll", data);
+        const promise = this.rpc.request('jclyons52.voter.voter.Query', 'VoteAll', data);
         return promise.then((data) => QueryAllVoteResponse.decode(new Reader(data)));
     }
     Poll(request) {
         const data = QueryGetPollRequest.encode(request).finish();
-        const promise = this.rpc.request("jclyons52.voter.voter.Query", "Poll", data);
+        const promise = this.rpc.request('jclyons52.voter.voter.Query', 'Poll', data);
         return promise.then((data) => QueryGetPollResponse.decode(new Reader(data)));
     }
     PollAll(request) {
         const data = QueryAllPollRequest.encode(request).finish();
-        const promise = this.rpc.request("jclyons52.voter.voter.Query", "PollAll", data);
+        const promise = this.rpc.request('jclyons52.voter.voter.Query', 'PollAll', data);
         return promise.then((data) => QueryAllPollResponse.decode(new Reader(data)));
     }
 }
 var globalThis = (() => {
-    if (typeof globalThis !== "undefined")
+    if (typeof globalThis !== 'undefined')
         return globalThis;
-    if (typeof self !== "undefined")
+    if (typeof self !== 'undefined')
         return self;
-    if (typeof window !== "undefined")
+    if (typeof window !== 'undefined')
         return window;
-    if (typeof global !== "undefined")
+    if (typeof global !== 'undefined')
         return global;
-    throw "Unable to locate global object";
+    throw 'Unable to locate global object';
 })();
 function longToNumber(long) {
     if (long.gt(Number.MAX_SAFE_INTEGER)) {
-        throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+        throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER');
     }
     return long.toNumber();
 }
