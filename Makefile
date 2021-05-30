@@ -1,6 +1,6 @@
 network?=testnet 
 moniker?=node1 
-validator?=alice 
+validator?=joe 
 keyring?=file 
 stake?=100000000stake
 

@@ -1,10 +1,22 @@
 accounts:
-  - name: alice
+  - name: joe
     coins: ["20000token", "200000000stake"]
-  - name: bob
-    coins: ["10000token", "100000000stake"]
+  - name: mario
+    coins: ["20000token", "200000000stake"]
+  - name: sadun
+    coins: ["20000token", "200000000stake"]
+  - name: andy
+    coins: ["20000token", "200000000stake"]
+  - name: christian
+    coins: ["20000token", "200000000stake"]
+  - name: sarah
+    coins: ["20000token", "200000000stake"]
+  - name: cam
+    coins: ["20000token", "200000000stake"]
+  - name: ash
+    coins: ["20000token", "200000000stake"]
 validator:
-  name: alice
+  name: joe
   staked: "100000000stake"
 client:
   vuex:
