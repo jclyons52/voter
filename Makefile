@@ -33,3 +33,5 @@ start:
 # clear the persisted volume containing the configuration for the node
 clear-config:
 	rm -R ~/.voter
+upload:
+	scp ./cmd/voterd root@178.128.86.73:.
